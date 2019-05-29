@@ -1,5 +1,6 @@
 package br.com.unifacisa.si.pp.tattostudio.tattostudio.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 import javax.persistence.Column;
@@ -15,7 +16,10 @@ import br.com.unifacisa.si.pp.tattostudio.tattostudio.dto.Servico;
 
 @Entity(name="agendamento")
 @SequenceGenerator(name="seq_agendamentos", sequenceName = "seq_agendamentos", initialValue = 1, allocationSize = 1)
-public class Agendamentos {
+public class Agendamentos implements Serializable {
+	
+	
+	private static final long serialVersionUID = -199943335533663156L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_agendamentos")

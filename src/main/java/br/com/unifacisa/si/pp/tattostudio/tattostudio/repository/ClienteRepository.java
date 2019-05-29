@@ -7,5 +7,7 @@ import br.com.unifacisa.si.pp.tattostudio.tattostudio.model.Cliente;
 
 @Repository
 public interface ClienteRepository extends JpaRepository<Cliente, Integer> {
-
+	
+	Cliente findByNome(String nome);
+	
 }

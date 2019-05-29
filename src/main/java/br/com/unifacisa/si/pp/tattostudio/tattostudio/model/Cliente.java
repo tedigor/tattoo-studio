@@ -36,6 +36,9 @@ public class Cliente implements Serializable {
 	@JoinColumn(name = "fk_cliente")
 	private List<Agendamentos> agendamentos = new ArrayList<>();
 	
+	public Cliente() {
+		super();
+	}
 	
 	public Integer getId() {
 		return id;
