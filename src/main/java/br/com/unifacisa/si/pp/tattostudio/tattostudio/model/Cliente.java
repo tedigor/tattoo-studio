@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
+import javax.validation.constraints.Min;
 
 @Entity(name="cliente")
 @SequenceGenerator(name="seq_cliente", sequenceName = "seq_cliente", initialValue = 1, allocationSize = 1)
@@ -26,18 +27,22 @@ public class Cliente implements Serializable {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_cliente")
 	@Column(name="id_cliente", nullable = false)
 	private Integer id;
+	
 	@Column(name="nome", nullable = false)
 	private String nome;
+	
 	@Column(name="telefone", nullable = false)
 	private String telefone;
+	
+	@Min(value = 18, message = "O cliente deve possuir mais de 18 anos")
 	@Column(name="idade", nullable = false)
 	private Integer idade;
+	
 	@OneToMany(fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.ALL)
 	@JoinColumn(name = "fk_cliente")
 	private List<Agendamentos> agendamentos = new ArrayList<>();
 	
 	public Cliente() {
-		super();
 	}
 	
 	public Integer getId() {

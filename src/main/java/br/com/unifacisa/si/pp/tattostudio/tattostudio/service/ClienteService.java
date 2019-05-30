@@ -10,11 +10,16 @@ import br.com.unifacisa.si.pp.tattostudio.tattostudio.repository.ClienteReposito
 
 @Service
 public class ClienteService {
-	
-	@Autowired
+
 	private ClienteRepository clienteRepository;
-	
-	public List<Cliente> getAll(){
+
+	@Autowired
+	public ClienteService(ClienteRepository clienteRepository) {
+		super();
+		this.clienteRepository = clienteRepository;
+	}
+
+	public List<Cliente> getAll() {
 		return clienteRepository.findAll();
 	}
 }
