@@ -13,7 +13,7 @@ import javax.persistence.SequenceGenerator;
 
 import br.com.unifacisa.si.pp.tattostudio.tattostudio.dto.Especialidade;
 
-@Entity(name = "profissional")
+@Entity(name = "profissionais")
 @SequenceGenerator(name = "seq_profissional", sequenceName = "seq_profissional", initialValue = 1, allocationSize = 1)
 public class Profissional implements Serializable {
 
@@ -30,7 +30,10 @@ public class Profissional implements Serializable {
 	@Enumerated(EnumType.STRING)
 	@Column(name = "especialidade", nullable = false)
 	private Especialidade especialidade;
-
+	
+	@Column(name = "exclusao_logica", nullable = false)
+	private Boolean exclusaoLogica = false;
+	
 	public Profissional(String nome, Especialidade especialidade) {
 		this.nome = nome;
 		this.especialidade = especialidade;
@@ -62,5 +65,15 @@ public class Profissional implements Serializable {
 	public void setEspecialidade(Especialidade especialidade) {
 		this.especialidade = especialidade;
 	}
+
+	public Boolean getExclusaoLogica() {
+		return exclusaoLogica;
+	}
+
+	public void setExclusaoLogica(Boolean exclusaoLogica) {
+		this.exclusaoLogica = exclusaoLogica;
+	}
+	
+	
 
 }

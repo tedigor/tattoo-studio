@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.unifacisa.si.pp.tattostudio.tattostudio.dto.ProfissionalDTO;
+import br.com.unifacisa.si.pp.tattostudio.tattostudio.exceptions.NaoAchouException;
 import br.com.unifacisa.si.pp.tattostudio.tattostudio.mapper.ProfissionalMapper;
 import br.com.unifacisa.si.pp.tattostudio.tattostudio.model.Profissional;
 import br.com.unifacisa.si.pp.tattostudio.tattostudio.repository.ProfissionalRepository;
@@ -30,7 +31,15 @@ public class ProfissionalService {
 	}
 	
 	public void deleteProfissionalById(Integer id) {
-		 profissionalRepository.deleteById(id);
+		Profissional profissional = profissionalRepository.getOne(id); 
+		profissional.setExclusaoLogica(true);
+		profissionalRepository.save(profissional);
 	}
+
+	public Profissional getById(Integer id) {
+		return profissionalRepository.findById(id).orElseThrow(()-> NaoAchouException.build("Não achou"));
+	}
+	
+
 	
 }

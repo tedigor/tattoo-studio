@@ -16,7 +16,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.Min;
 
-@Entity(name="cliente")
+@Entity(name="clientes")
 @SequenceGenerator(name="seq_cliente", sequenceName = "seq_cliente", initialValue = 1, allocationSize = 1)
 public class Cliente implements Serializable {
 	
@@ -34,7 +34,7 @@ public class Cliente implements Serializable {
 	@Column(name="telefone", nullable = false)
 	private String telefone;
 	
-	@Min(value = 18, message = "O cliente deve possuir mais de 18 anos")
+	
 	@Column(name="idade", nullable = false)
 	private Integer idade;
 	
@@ -42,6 +42,16 @@ public class Cliente implements Serializable {
 	@JoinColumn(name = "fk_cliente")
 	private List<Agendamentos> agendamentos = new ArrayList<>();
 	
+	@Column(name = "exclusao_logica", nullable = false)
+	private Boolean exclusaoLogica = false;
+	
+	public Cliente(String nome, String telefone, Integer idade) {
+		super();
+		this.nome = nome;
+		this.telefone = telefone;
+		this.idade = idade;
+	}
+
 	public Cliente() {
 	}
 	

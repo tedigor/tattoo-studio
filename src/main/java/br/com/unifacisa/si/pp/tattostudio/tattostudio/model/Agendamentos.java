@@ -2,6 +2,7 @@ package br.com.unifacisa.si.pp.tattostudio.tattostudio.model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -18,7 +19,7 @@ import javax.persistence.SequenceGenerator;
 
 import br.com.unifacisa.si.pp.tattostudio.tattostudio.dto.Servico;
 
-@Entity(name = "agendamento")
+@Entity(name = "agendamentos")
 @SequenceGenerator(name = "seq_agendamentos", sequenceName = "seq_agendamentos", initialValue = 1, allocationSize = 1)
 public class Agendamentos implements Serializable {
 
@@ -29,8 +30,8 @@ public class Agendamentos implements Serializable {
 	@Column(name = "id_agendamento", nullable = false)
 	private Long id;
 
-	@Column(name = "horario", nullable = false)
-	private LocalDate horario;
+	@Column(name = "horario", nullable = false, unique = true)
+	private LocalDateTime horario;
 
 	@Enumerated(EnumType.STRING)
 	@Column(name = "servico", nullable = false)
@@ -39,6 +40,9 @@ public class Agendamentos implements Serializable {
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "fk_profissional")
 	private Profissional profissional;
+	
+	@Column(name = "exclusao_logica", nullable = false)
+	private Boolean exclusaoLogica = false;
 
 	public Long getId() {
 		return id;
@@ -48,11 +52,11 @@ public class Agendamentos implements Serializable {
 		this.id = id;
 	}
 
-	public LocalDate getHorario() {
+	public LocalDateTime getHorario() {
 		return horario;
 	}
 
-	public void setHorario(LocalDate horario) {
+	public void setHorario(LocalDateTime horario) {
 		this.horario = horario;
 	}
 
