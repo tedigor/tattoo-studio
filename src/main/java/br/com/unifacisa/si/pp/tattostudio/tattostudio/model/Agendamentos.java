@@ -1,8 +1,7 @@
 package br.com.unifacisa.si.pp.tattostudio.tattostudio.model;
 
 import java.io.Serializable;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -16,6 +15,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import br.com.unifacisa.si.pp.tattostudio.tattostudio.dto.Servico;
 
@@ -31,18 +32,30 @@ public class Agendamentos implements Serializable {
 	private Long id;
 
 	@Column(name = "horario", nullable = false, unique = true)
-	private LocalDateTime horario;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date horario;
 
 	@Enumerated(EnumType.STRING)
 	@Column(name = "servico", nullable = false)
 	private Servico servico;
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "fk_profissional")
 	private Profissional profissional;
-	
+
 	@Column(name = "exclusao_logica", nullable = false)
 	private Boolean exclusaoLogica = false;
+
+	public Agendamentos() {
+		super();
+	}
+
+	public Agendamentos(Long id, Date horario, Servico servico) {
+		super();
+		this.id = id;
+		this.horario = horario;
+		this.servico = servico;
+	}
 
 	public Long getId() {
 		return id;
@@ -52,11 +65,11 @@ public class Agendamentos implements Serializable {
 		this.id = id;
 	}
 
-	public LocalDateTime getHorario() {
+	public Date getHorario() {
 		return horario;
 	}
 
-	public void setHorario(LocalDateTime horario) {
+	public void setHorario(Date horario) {
 		this.horario = horario;
 	}
 
@@ -75,6 +88,13 @@ public class Agendamentos implements Serializable {
 	public void setProfissional(Profissional profissional) {
 		this.profissional = profissional;
 	}
-	
-	
+
+	public Boolean getExclusaoLogica() {
+		return exclusaoLogica;
+	}
+
+	public void setExclusaoLogica(Boolean exclusaoLogica) {
+		this.exclusaoLogica = exclusaoLogica;
+	}
+
 }

@@ -11,6 +11,6 @@ public interface ProfissionalRepository extends JpaRepository<Profissional, Inte
 	
 	Profissional findByNome(String nome);
 	
-	@Query("SELECT * FROM Profissional p WHERE p.exclusaoLogica = false")
+	@Query(nativeQuery= true, value = "SELECT * FROM profissionais p WHERE p.exclusao_logica = false")
 	List<Profissional> findAll();
 }
