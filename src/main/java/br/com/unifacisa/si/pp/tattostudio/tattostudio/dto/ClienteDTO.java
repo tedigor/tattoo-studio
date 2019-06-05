@@ -4,6 +4,8 @@ import javax.validation.constraints.Min;
 
 public class ClienteDTO {
 	
+	private Integer id;
+	
 	private String nome;
 	
 	@Min(value = 18, message = "O cliente deve possuir mais de 18 anos")
@@ -45,4 +47,11 @@ public class ClienteDTO {
 		this.telefone = telefone;
 	}
 
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
 }

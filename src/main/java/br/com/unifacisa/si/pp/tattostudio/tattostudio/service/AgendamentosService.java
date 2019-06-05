@@ -1,5 +1,6 @@
 package br.com.unifacisa.si.pp.tattostudio.tattostudio.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import br.com.unifacisa.si.pp.tattostudio.tattostudio.model.Profissional;
 import br.com.unifacisa.si.pp.tattostudio.tattostudio.repository.AgendamentosRepository;
 import br.com.unifacisa.si.pp.tattostudio.tattostudio.repository.ClienteRepository;
 import br.com.unifacisa.si.pp.tattostudio.tattostudio.repository.ProfissionalRepository;
+import br.com.unifacisa.si.pp.tattostudio.tattostudio.specification.AgendamentosSpecification;
 
 @Service
 public class AgendamentosService {
@@ -63,5 +65,10 @@ public class AgendamentosService {
 		
 		agendamentoRepository.save(agendamento);
 	}
+	
+	public List<Agendamentos> findBySpecification(String nomeProfissional, String horarioAgendamento){
+		return agendamentoRepository.findAll(AgendamentosSpecification.byFilter(nomeProfissional, horarioAgendamento));
+	}
+	
 }
  
